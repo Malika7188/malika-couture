@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Malika Couture - Products</title>
+</head>
+<body>
+    <h1>Our Products</h1>
+    <ul>
+        {% for product in products %}
+            <li>
+                <a href="{{ product.id }}/">{{ product.name }}</a> - ${{ product.price }}
+                {% if product.image %}
+                    <br>
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" width="150">
+                {% endif %}
+            </li>
+        {% empty %}
+            <li>No products available yet.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
