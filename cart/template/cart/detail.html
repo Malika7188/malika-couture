@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your Cart - Malika Couture</title>
+</head>
+<body>
+    <h1>Your Shopping Cart</h1>
+    <ul>
+        {% for item in cart %}
+            <li>
+                {{ item.product.name }} - {{ item.quantity }} × ${{ item.product.price }} = ${{ item.total_price }}
+                <a href="{% url 'cart_remove' item.product.id %}">Remove</a>
+            </li>
+        {% empty %}
+            <li>Your cart is empty.</li>
+        {% endfor %}
+    </ul>
+
+    <p>Total: ${{ cart.get_total_price }}</p>
+    <a href="/">Continue Shopping</a>
+</body>
+</html>
