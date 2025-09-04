@@ -2,6 +2,8 @@
 from django.db import models
 from django.utils import timezone
 import secrets
+import uuid
+
 
 class Payment(models.Model):
     STATUS_CHOICES = [
@@ -33,3 +35,6 @@ class Payment(models.Model):
             # token_hex(12) => 24 hex chars => safe under 28-byte memo text limit
             self.memo = secrets.token_hex(12)
         super().save(*args, **kwargs)
+def _generate_memo():
+    # Stellar memo max length = 28 chars
+    return str(uuid.uuid4())[:28]
