@@ -1,0 +1,11 @@
+Django>=4.2
+djangorestframework
+psycopg[binary]
+Pillow
+python-dotenv
+django-environ
+whitenoise
+django-allauth
+stellar-sdk==13.0.0
+stellar-sdk
+requests
