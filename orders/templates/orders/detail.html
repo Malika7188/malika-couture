@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Order #{{ order.id }}</h1>
+  <p>Status: {{ order.get_status_display }}</p>
+  <p>Total: KSh {{ order.total }}</p>
+
+  <h3>Items</h3>
+  <ul>
+    {% for it in order.items.all %}
+      <li>{{ it.product.name }} — {{ it.quantity }} × KSh {{ it.unit_price }}</li>
+    {% endfor %}
+  </ul>
+
+  <hr>
+
+  {% if order.status != "paid" %}
+    <!-- Payment button -->
+    <a class="button primary" href="{% url 'payments:initiate_payment' order.pk %}">
+      Pay with Stellar
+    </a>
+  {% else %}
+    <p><strong>Paid</strong> on {{ order.updated_at|default:order.created_at }}</p>
+  {% endif %}
+{% endblock %}
