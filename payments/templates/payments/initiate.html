@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Pay Order #{{ order.pk }}</h1>
+
+  <p>Order total: <strong>KSh {{ payment.amount }}</strong></p>
+  <p>Pay this amount in XLM: <strong>{{ payment.amount_xlm }}</strong></p>
+
+  <p>Send payment to this merchant address on Stellar Testnet:</p>
+  <pre>{{ merchant_pub }}</pre>
+
+  <p><strong>Memo (copy exactly):</strong> <code>{{ payment.memo }}</code></p>
+
+  <ol>
+    <li>Open your Stellar wallet (Freighter / Lobstr / Stellar Laboratory / other).</li>
+    <li>Send <strong>{{ payment.amount_xlm }} XLM</strong> to the merchant address above.</li>
+    <li>Be sure to include the memo exactly as shown (case sensitive).</li>
+    <li>After sending, click Verify below to confirm the payment on-chain.</li>
+  </ol>
+
+  <a class="button primary" href="{% url 'payments:verify_payment' payment.id %}">I have paid — Verify payment</a>
+{% endblock %}
